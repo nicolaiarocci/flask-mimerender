@@ -86,7 +86,7 @@ global_override_input_key = None
 global_charset = None
 
 def mimerender(default=None, override_arg_idx=None, override_input_key=None,
-               charset=None, **renderers):
+               **renderers):
     """
     Usage:
         @mimerender(default='xml', override_arg_idx=-1, override_input_key='format', , <renderers>)
@@ -124,7 +124,6 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
     if not default: default = global_default
     if not override_arg_idx: override_arg_idx = global_override_arg_idx
     if not override_input_key: override_input_key = global_override_input_key
-    if not charset: charset = global_charset
     
     supported = list()
     renderer_dict = dict()

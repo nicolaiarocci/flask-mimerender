@@ -10,8 +10,15 @@ This module allows, with the use of python decorators, to transparently select a
 ## Attribution ##
 This is a Flask port from the excellent [mimerender](http://code.google.com/p/mimerender/) v0.2.3 by Martin Blech
 
-## Usage ##
-This is an example from the included src/example.py script:
+## Usage ##      
+The decorated function must return a dict with the objects necessary to
+render the final result to the user. The selected renderer will be called
+with the map contents as keyword arguments.
+If override_arg_idx isn't None, the wrapped function's positional argument
+at that index will be removed and used instead of the Accept header.
+override_input_key works the same way, but with the specified query string 
+parameter.
+
 	from flask import Flask, request, jsonify
 	from mimerender_flask import mimerender
 
