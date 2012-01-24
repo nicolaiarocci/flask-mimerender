@@ -10,7 +10,7 @@ This module allows, with the use of python decorators, to transparently select a
 ## Attribution ##
 This is a Flask port from the excellent [mimerender](http://code.google.com/p/mimerender/) v0.2.3 by Martin Blech
 
-## Usage ##      
+## Usage ##
 The decorated function must return a dict with the objects necessary to
 render the final result to the user. The selected renderer will be called
 with the map contents as keyword arguments.
