@@ -46,3 +46,16 @@ parameter.
 
 	if __name__ == "__main__":
 	    app.run(debug=True)
+
+Then you can do:
+	$ curl -H "Accept: application/html" localhost:5000/
+	<html><body>Hello, World!</body></html>
+
+	$ curl -H "Accept: application/xml" localhost:5000/
+	<message>Hello, World!</message>
+
+	$ curl -H "Accept: application/json" localhost:5000/
+	{'message':'Hello, World!'}
+
+	$ curl -H "Accept: text/plain" localhost:5000/
+	Hello, World!	    
