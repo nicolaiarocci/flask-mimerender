@@ -15,6 +15,9 @@ This is an example from the included src/example.py script:
 	from flask import Flask, request, jsonify
 	from mimerender_flask import mimerender
 
+	from flask import Flask, request, jsonify
+	from mimerender_flask import mimerender
+
 	render_xml = lambda message: '<message>%s</message>' % message
 	render_json = jsonify
 	render_html = lambda message: '<html><body>%s</body></html>' % message
