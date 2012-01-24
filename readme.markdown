@@ -48,6 +48,7 @@ parameter.
 	    app.run(debug=True)
 
 Then you can do:
+
 	$ curl -H "Accept: application/html" localhost:5000/
 	<html><body>Hello, World!</body></html>
 
