@@ -8,7 +8,7 @@ setup(
     description='RESTful resource variant rendering using MIME Media-Types, for the Flask Micro Web Framework',
     author='Nicola Iarocci',
     author_email='nicola@nicolaiarocci.com',
-    url='http://code.google.com/p/mimerender/',
+    url='https://github.com/nicolaiarocci/mimerender_flask',
     license='MIT',
     long_description="""
     This module allows, with the use of python decorators, to transparently select a render function for an HTTP request handler's result. It uses mimeparse to parse the HTTP Accept header and select the best available representation.
