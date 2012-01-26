@@ -8,7 +8,7 @@ __author__    = 'Nicola Iarocci <nicola@nicolaiarocci.com>'
 __license__   = 'MIT'
 __copyright__ = '2012 Nicola Iarocci'
 
-from flask import request
+from flask import request, make_response
 from functools import wraps 
 
 XML   = 'xml'
@@ -86,7 +86,7 @@ global_override_input_key = None
 global_charset = None
 
 def mimerender(default=None, override_arg_idx=None, override_input_key=None,
-               **renderers):
+               charset=None, **renderers):
     """
     Usage:
         @mimerender(default='xml', override_arg_idx=-1, override_input_key='format', , <renderers>)
@@ -124,6 +124,7 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
     if not default: default = global_default
     if not override_arg_idx: override_arg_idx = global_override_arg_idx
     if not override_input_key: override_input_key = global_override_input_key
+    if not charset: charset = global_charset
     
     supported = list()
     renderer_dict = dict()
@@ -156,7 +157,10 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
                 mime, renderer = default_mime, default_renderer
             if not shortmime: shortmime = _get_short_mime(mime)
             result = target(*args, **kwargs)
-            return renderer(**result)
+            resp = make_response(renderer(**result))
+            resp.mimetype = mime
+            resp.charset = charset
+            return resp
         return wrapper
     
     return wrap

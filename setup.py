@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='mimerender_flask',
-    version='0.1.0',
+    version='0.1.1',
     description='RESTful resource variant rendering using MIME Media-Types, for the Flask Micro Web Framework',
     author='Nicola Iarocci',
     author_email='nicola@nicolaiarocci.com',
