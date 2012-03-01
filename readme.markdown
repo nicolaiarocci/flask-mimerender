@@ -56,4 +56,12 @@ Then you can do:
 	{'message':'Hello, World!'}
 
 	$ curl -H "Accept: text/plain" localhost:5000/
-	Hello, World!	    
+	Hello, World!
+
+## Installation ##
+Flask-MimeRender is on the official Python Package Index (PyPI). All you have to do is
+
+	pip install flask-mimerender
+
+and you're good to go.
+
