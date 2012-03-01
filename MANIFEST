@@ -1,2 +1,2 @@
 setup.py
-src\mimerender_flask.py
+src\flaskmimerender.py

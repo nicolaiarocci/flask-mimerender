@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from mimerender_flask import mimerender
+from flaskmimerender import mimerender
 
 render_xml = lambda message: '<message>%s</message>' % message
 render_json = jsonify

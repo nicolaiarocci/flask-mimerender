@@ -3,12 +3,12 @@
 from distutils.core import setup
 
 setup(
-    name='mimerender_flask',
+    name='Flask-MimeRender',
     version='0.1.1',
     description='RESTful resource variant rendering using MIME Media-Types, for the Flask Micro Web Framework',
     author='Nicola Iarocci',
     author_email='nicola@nicolaiarocci.com',
-    url='https://github.com/nicolaiarocci/mimerender_flask',
+    url='https://github.com/nicolaiarocci/flask-mimerender',
     license='MIT',
     long_description="""
     This module allows, with the use of python decorators, to transparently select a render function for an HTTP request handler's result. It uses mimeparse to parse the HTTP Accept header and select the best available representation.
@@ -25,7 +25,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     
-    py_modules=['mimerender_flask'],
+    py_modules=['flaskmimerender'],
     package_dir={'':'src'},
     requires=['flask'],
     install_requires=['flask'],
