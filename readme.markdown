@@ -8,7 +8,7 @@ This module allows, with the use of python decorators, to transparently select a
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 ## Attribution ##
-This is a Flask port from the excellent [mimerender](http://code.google.com/p/mimerender/) v0.2.3 by Martin Blech
+This is a Flask port from the excellent [mimerender](http://code.google.com/p/mimerender/) v0.2.3 by Martin Blech. *Update* Martin has moved to GitHub and added Flask support to the original mimerender project. He has plans for further developments, so you might want to fork/clone [his project](https://github.com/martinblech/mimerender) instead.
 
 ## Usage ##
 The decorated function must return a dict with the objects necessary to
