@@ -156,8 +156,8 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
             else:
                 mime, renderer = default_mime, default_renderer
             if not shortmime: shortmime = _get_short_mime(mime)
-            result = target(*args, **kwargs)
-            resp = make_response(renderer(**result))
+            result, status = target(*args, **kwargs)
+            resp = make_response(renderer(**result), status)
             resp.mimetype = mime
             resp.charset = charset
             return resp
