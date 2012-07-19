@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='Flask-MimeRender',
-    version='0.1.1',
+    version='0.1.2',
     description='RESTful resource variant rendering using MIME Media-Types, for the Flask Micro Web Framework',
     author='Nicola Iarocci',
     author_email='nicola@nicolaiarocci.com',
@@ -24,7 +24,7 @@ setup(
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
-    
+
     py_modules=['flaskmimerender'],
     package_dir={'':'src'},
     requires=['flask'],

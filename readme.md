@@ -4,6 +4,9 @@ This module allows, with the use of python decorators, to transparently select a
 ## Author ##
 [Nicola Iarocci](mailto:nicola@nicolaiarocci.com)
 
+### Contributors ###
+[Bruno Ripa](http://twitter.com/brunoripa)
+
 ## License ##
 [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
