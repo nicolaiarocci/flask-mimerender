@@ -1,33 +1,34 @@
 """
 Python module for RESTful resource representation using MIME Media-Types
-This is a Flask port from the excellent mimerender v0.2.3 by Martin Blech (http://code.google.com/p/mimerender/)
+This is a Flask port from the excellent mimerender v0.2.3 by Martin Blech
+(http://code.google.com/p/mimerender/)
 """
 
-__version__   = '0.1.0'
-__author__    = 'Nicola Iarocci <nicola@nicolaiarocci.com>'
-__license__   = 'MIT'
+__version__ = '0.1.0'
+__author__ = 'Nicola Iarocci <nicola@nicolaiarocci.com>'
+__license__ = 'MIT'
 __copyright__ = '2012 Nicola Iarocci'
 
 from flask import request, make_response
-from functools import wraps 
+from functools import wraps
 
-XML   = 'xml'
-JSON  = 'json'
-YAML  = 'yaml'
+XML = 'xml'
+JSON = 'json'
+YAML = 'yaml'
 XHTML = 'xhtml'
-HTML  = 'html'
-TXT   = 'txt'
-CSV   = 'csv'
-TSV   = 'tsv'
-RSS   = 'rss'
-RDF   = 'rdf'
-ATOM  = 'atom'
-M3U   = 'm3u'
-PLS   = 'pls'
-XSPF  = 'xspf'
-ICAL  = 'ical'
-KML   = 'kml'
-KMZ   = 'kmz'
+HTML = 'html'
+TXT = 'txt'
+CSV = 'csv'
+TSV = 'tsv'
+RSS = 'rss'
+RDF = 'rdf'
+ATOM = 'atom'
+M3U = 'm3u'
+PLS = 'pls'
+XSPF = 'xspf'
+ICAL = 'ical'
+KML = 'kml'
+KMZ = 'kmz'
 
 _MIME_TYPES = {
     JSON:  ('application/json',),
@@ -41,7 +42,8 @@ _MIME_TYPES = {
     RSS:   ('application/rss+xml',),
     RDF:   ('application/rdf+xml',),
     ATOM:  ('application/atom+xml',),
-    M3U:   ('audio/x-mpegurl', 'application/x-winamp-playlist', 'audio/mpeg-url', 'audio/mpegurl',),
+    M3U:   ('audio/x-mpegurl', 'application/x-winamp-playlist',
+            'audio/mpeg-url', 'audio/mpegurl',),
     PLS:   ('audio/x-scpls',),
     XSPF:  ('application/xspf+xml',),
     ICAL:  ('text/calendar',),
@@ -49,33 +51,41 @@ _MIME_TYPES = {
     KMZ:   ('application/vnd.google-earth.kmz',),
 }
 
+
 def register_mime(shortname, mime_types):
     """
     Register a new mime type.
     Usage example:
-        mimerender.register_mime('svg', ('application/x-svg', 'application/svg+xml',))
     After this you can do:
+        mimerender.register_mime('svg', ('application/x-svg', 'application/svg+xml',))
         @mimerender.mimerender(svg=render_svg)
         def GET(...
             ...
     """
     if shortname in _MIME_TYPES:
-        raise MimeRenderException('"%s" has already been registered'%shortname)
+        raise MimeRenderException('"%s" has already been registered' %
+                                  shortname)
     _MIME_TYPES[shortname] = mime_types
 
-class MimeRenderException(Exception): pass
+
+class MimeRenderException(Exception):
+    pass
+
 
 def _get_mime_types(shortname):
     try:
         return _MIME_TYPES[shortname]
     except KeyError:
-        raise MimeRenderException('No mime type for shortname "%s"' % shortname)
+        raise MimeRenderException('No mime type for shortname "%s"' %
+                                  shortname)
+
 
 def _get_short_mime(mime):
     for shortmime, mimes in _MIME_TYPES.items():
         if mime in mimes:
             return shortmime
     raise MimeRenderException('No short mime for type "%s"' % mime)
+
 
 def _best_mime(supported):
     return request.accept_mimetypes.best_match(supported)
@@ -85,20 +95,22 @@ global_override_arg_idx = None
 global_override_input_key = None
 global_charset = None
 
+
 def mimerender(default=None, override_arg_idx=None, override_input_key=None,
+
                charset=None, **renderers):
     """
     Usage:
         @mimerender(default='xml', override_arg_idx=-1, override_input_key='format', , <renderers>)
         GET(self, ...) (or POST, etc.)
-        
+
     The decorated function must return a dict with the objects necessary to
     render the final result to the user. The selected renderer will be called
     with the map contents as keyword arguments.
     If override_arg_idx isn't None, the wrapped function's positional argument
     at that index will be removed and used instead of the Accept header.
     override_input_key works the same way, but with web.input().
-    
+
     Example:
     class greet:
         @mimerender.mimerender(
@@ -119,13 +131,17 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
         try:
             return renderer_dict[mime]
         except KeyError:
-            raise MimeRenderException('No renderer for mime "%s"'%mime)
-    
-    if not default: default = global_default
-    if not override_arg_idx: override_arg_idx = global_override_arg_idx
-    if not override_input_key: override_input_key = global_override_input_key
-    if not charset: charset = global_charset
-    
+            raise MimeRenderException('No renderer for mime "%s"' % mime)
+
+    if not default:
+        default = global_default
+    if not override_arg_idx:
+        override_arg_idx = global_override_arg_idx
+    if not override_input_key:
+        override_input_key = global_override_input_key
+    if not charset:
+        charset = global_charset
+
     supported = list()
     renderer_dict = dict()
     for shortname, renderer in renderers.items():
@@ -138,7 +154,7 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
 
     else:
         default_mime, default_renderer = renderer_dict.items()[0]
-    
+
     def wrap(target):
         @wraps(target)
         def wrapper(*args, **kwargs):
@@ -146,23 +162,26 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
             shortmime = None
             if override_arg_idx != None:
                 shortmime = args[override_arg_idx]
-            if not shortmime and override_input_key and override_input_key in request.args.keys():
+            if not shortmime and override_input_key and \
+                    override_input_key in request.args.keys():
                 shortmime = request.args[override_input_key]
-            if shortmime: mime = _get_mime_types(shortmime)[0]
+            if shortmime:
+                mime = _get_mime_types(shortmime)[0]
             if not mime:
                 mime = _best_mime(supported)
             if mime:
                 renderer = get_renderer(mime)
             else:
                 mime, renderer = default_mime, default_renderer
-            if not shortmime: shortmime = _get_short_mime(mime)
+            if not shortmime:
+                shortmime = _get_short_mime(mime)
             result, status = target(*args, **kwargs)
             resp = make_response(renderer(**result), status)
             resp.mimetype = mime
             resp.charset = charset
             return resp
         return wrapper
-    
+
     return wrap
 
 if __name__ == "__main__":
@@ -170,5 +189,5 @@ if __name__ == "__main__":
 
     class TestMimeRender(unittest.TestCase):
         pass
-    
+
     unittest.main()
