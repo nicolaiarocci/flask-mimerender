@@ -4,7 +4,7 @@ This is a Flask port from the excellent mimerender v0.2.3 by Martin Blech
 (http://code.google.com/p/mimerender/)
 """
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __author__ = 'Nicola Iarocci <nicola@nicolaiarocci.com>'
 __license__ = 'MIT'
 __copyright__ = '2012 Nicola Iarocci'
