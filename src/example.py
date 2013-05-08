@@ -8,17 +8,17 @@ render_txt = lambda message: message
 
 app = Flask(__name__)
 
+
 @app.route('/')
-@mimerender(
-    default = 'html',
-    html = render_html,
-    xml  = render_xml,
-    json = render_json,
-    txt  = render_txt
-)
+@mimerender(default='html',
+            html=render_html,
+            xml=render_xml,
+            json=render_json,
+            txt=render_txt
+            )
 def index():
-	if request.method == 'GET':
-		return {'message': 'Hello, World!'}
+    if request.method == 'GET':
+        return {'message': 'Hello, World!'}
 
 if __name__ == "__main__":
     app.run(debug=True)
