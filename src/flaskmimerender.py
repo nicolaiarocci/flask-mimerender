@@ -97,7 +97,6 @@ global_charset = None
 
 
 def mimerender(default=None, override_arg_idx=None, override_input_key=None,
-
                charset=None, **renderers):
     """
     Usage:
@@ -160,7 +159,7 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
         def wrapper(*args, **kwargs):
             mime = None
             shortmime = None
-            if override_arg_idx != None:
+            if override_arg_idx is not None:
                 shortmime = args[override_arg_idx]
             if not shortmime and override_input_key and \
                     override_input_key in request.args.keys():
@@ -175,8 +174,8 @@ def mimerender(default=None, override_arg_idx=None, override_input_key=None,
                 mime, renderer = default_mime, default_renderer
             if not shortmime:
                 shortmime = _get_short_mime(mime)
-            result, status = target(*args, **kwargs)
-            resp = make_response(renderer(**result), status)
+            result = target(*args, **kwargs)
+            resp = make_response(renderer(**result))
             resp.mimetype = mime
             resp.charset = charset
             return resp
