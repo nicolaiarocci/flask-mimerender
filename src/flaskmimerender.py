@@ -4,10 +4,10 @@ This is a Flask port from the excellent mimerender v0.2.3 by Martin Blech
 (http://code.google.com/p/mimerender/)
 """
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 __author__ = 'Nicola Iarocci <nicola@nicolaiarocci.com>'
 __license__ = 'MIT'
-__copyright__ = '2012 Nicola Iarocci'
+__copyright__ = '2013 Nicola Iarocci'
 
 from flask import request, make_response
 from functools import wraps
